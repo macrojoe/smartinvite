@@ -26,7 +26,10 @@ class GuestRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required',
+            'tickets' => 'required',
+            'event_id' => 'required',
+            'guest_status_id' => 'required'
         ];
     }
 

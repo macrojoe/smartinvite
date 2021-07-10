@@ -24,7 +24,7 @@ class GuestStatusSeeder extends Seeder
         $status->save();
 
         $status = new GuestStatus;
-        $status->name = 'Quizás';
+        $status->name = 'Pendiente';
         $status->save();
     }
 }

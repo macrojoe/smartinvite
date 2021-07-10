@@ -78,9 +78,8 @@ class EventCrudController extends CrudController
         CRUD::addColumn([
             'name'      => 'comments', // The db column name
             'label'     => 'Comentarios', // Table column heading
-            'type' => 'wysiwyg',
             'escaped' => false,
-            'limit'  => -1, // character limit; default is 50;
+            // 'limit'  => -1, // character limit; default is 50;
             
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
@@ -153,7 +152,7 @@ class EventCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name'      => 'text', // The db column name
+            'name'      => 'comments', // The db column name
             'label'     => 'Comentarios', // Table column heading
             'type' => 'wysiwyg',
             'escaped' => false,

@@ -111,9 +111,8 @@ class GuestCrudController extends CrudController
         CRUD::addColumn([
             'name'      => 'comments', // The db column name
             'label'     => 'Comentario', // Table column heading
-            'type' => 'wysiwyg',
             'escaped' => false,
-            'limit'  => -1, // character limit; default is 50;
+            // 'limit'  => -1, // character limit; default is 50;
             
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
@@ -233,6 +232,7 @@ class GuestCrudController extends CrudController
             'wrapper'   => [
                 'class' => 'form-group col-md-4'
             ],
+            'default' => '3'
          ]);
         
         CRUD::addField([

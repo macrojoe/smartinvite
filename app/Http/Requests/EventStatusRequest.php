@@ -26,6 +26,7 @@ class EventStatusRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required',
             // 'name' => 'required|min:5|max:255'
         ];
     }

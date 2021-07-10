@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/admin');
 });
+
+Route::get('/storage', [TestingController::class, 'storageLink']);
+Route::get('/migrate', [TestingController::class, 'migrate']);
+Route::get('/optimize', [TestingController::class, 'optimize']);

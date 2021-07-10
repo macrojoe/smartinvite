@@ -28,6 +28,13 @@ class Event extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function countGuest(){
+        return count($this->guests);
+    }
+
+    public function countConfirmedGuest(){
+        return count($this->guests->where('guest_status_id','2'));
+    }
 
     /*
     |--------------------------------------------------------------------------

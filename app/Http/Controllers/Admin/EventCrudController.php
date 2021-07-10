@@ -58,6 +58,26 @@ class EventCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
+            'name'      => 'guest', // The db column name
+            'label'     => 'Invitados', // Table column heading
+            'type'      => 'model_function',
+            'function_name' => 'countGuest'
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
+            'name'      => 'guestConfirmed', // The db column name
+            'label'     => 'Invitados Confirmados', // Table column heading
+            'type'      => 'model_function',
+            'function_name' => 'countConfirmedGuest'
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
             'label'     => 'Estatus', // Table column headin
             'type'      => 'relationship',
             'name'      => 'status', // The db column name

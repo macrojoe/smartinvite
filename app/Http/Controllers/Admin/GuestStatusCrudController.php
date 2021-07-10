@@ -28,7 +28,7 @@ class GuestStatusCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\GuestStatus::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest-status');
-        CRUD::setEntityNameStrings('guest status', 'guest statuses');
+        CRUD::setEntityNameStrings('estatus de invitado', 'estatus de invitados');
     }
 
     /**
@@ -39,13 +39,21 @@ class GuestStatusCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // columns
+        // CRUD::setFromDb(); // columns
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+        
+        CRUD::addColumn([
+            'name'      => 'name', // The db column name
+            'label'     => 'Nombre Status', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
     }
 
     /**
@@ -58,7 +66,14 @@ class GuestStatusCrudController extends CrudController
     {
         CRUD::setValidation(GuestStatusRequest::class);
 
-        CRUD::setFromDb(); // fields
+        // CRUD::setFromDb(); // fields
+        CRUD::addField([
+            'name'      => 'name', // The db column name
+            'label'     => 'Nombre Status', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

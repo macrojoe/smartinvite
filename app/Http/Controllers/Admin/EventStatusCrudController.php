@@ -28,7 +28,7 @@ class EventStatusCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\EventStatus::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/event-status');
-        CRUD::setEntityNameStrings('event status', 'event statuses');
+        CRUD::setEntityNameStrings('estatus de evento', 'estatus de eventos');
     }
 
     /**
@@ -39,7 +39,15 @@ class EventStatusCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // columns
+        // CRUD::setFromDb(); // columns
+        
+        CRUD::addColumn([
+            'name'      => 'name', // The db column name
+            'label'     => 'Nombre Status', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -58,7 +66,15 @@ class EventStatusCrudController extends CrudController
     {
         CRUD::setValidation(EventStatusRequest::class);
 
-        CRUD::setFromDb(); // fields
+        // CRUD::setFromDb(); // fields
+
+        CRUD::addField([
+            'name'      => 'name', // The db column name
+            'label'     => 'Nombre Status', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

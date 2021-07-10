@@ -28,7 +28,7 @@ class GuestCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Guest::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest');
-        CRUD::setEntityNameStrings('guest', 'guests');
+        CRUD::setEntityNameStrings('invitado', 'invitados');
     }
 
     /**

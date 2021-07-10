@@ -16,12 +16,13 @@ class CreateGuestsTable extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->text('text');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->text('comments')->nullable();
 
-            $table->integer('tickets');
-            $table->integer('confirmed_tickets');
-            $table->datetime('confirmed_at');
+            $table->integer('tickets')->nullable();
+            $table->integer('confirmed_tickets')->nullable();
+            $table->datetime('confirmed_at')->nullable();
 
             $table->bigInteger('event_id')->unsigned()->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade')->onUpdate('cascade');

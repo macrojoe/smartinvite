@@ -35,7 +35,7 @@ class Guest extends Model
     |--------------------------------------------------------------------------
     */
     public function status(){
-        return $this->belongsTo('App\Models\GuestStatus','event_status_id');
+        return $this->belongsTo('App\Models\GuestStatus','guest_status_id');
     }
 
     public function event(){

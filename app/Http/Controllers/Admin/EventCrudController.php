@@ -39,7 +39,62 @@ class EventCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // columns
+        // CRUD::setFromDb(); // columns
+
+        CRUD::addColumn([
+            'name'      => 'name', // The db column name
+            'label'     => 'Nombre', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+        
+        CRUD::addColumn([
+            'name'      => 'date', // The db column name
+            'label'     => 'Fecha', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
+            'label'     => 'Estatus', // Table column headin
+            'type'      => 'relationship',
+            'name'      => 'status', // The db column name
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
+            'label'     => 'Imagen', // Table column headin
+            'type'      => 'image',
+            'name'      => 'image', // The db column name
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
+            'name'      => 'comments', // The db column name
+            'label'     => 'Comentarios', // Table column heading
+            'type' => 'wysiwyg',
+            'escaped' => false,
+            'limit'  => -1, // character limit; default is 50;
+            
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
+            'name'      => 'user', // The db column name
+            'type'      => 'relationship',
+            'label'     => 'Creado por', // Table column headin
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -58,7 +113,69 @@ class EventCrudController extends CrudController
     {
         CRUD::setValidation(EventRequest::class);
 
-        CRUD::setFromDb(); // fields
+        // CRUD::setFromDb(); // fields
+
+        CRUD::addField([
+            'name'      => 'name', // The db column name
+            'label'     => 'Nombre', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+        
+        CRUD::addField([
+            'name'      => 'date', // The db column name
+            'label'     => 'Fecha', // Table column heading
+            'type'      => 'datetime'
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addField([
+            // 1-n relationship
+            'label'     => 'Estatus', // Table column heading
+            'type'      => 'select',
+            'name'      => 'event_status_id', // the column that contains the ID of that connected entity;
+            'entity'    => 'status', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => "App\Models\EventStatus", // foreign key model
+            'default' => request()->get("event_status_id",NULL)
+         ]);
+
+        CRUD::addField([
+            'label'     => 'Imagen', // Table column headin
+            'type'      => 'image',
+            'name'      => 'image', // The db column name
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addField([
+            'name'      => 'text', // The db column name
+            'label'     => 'Comentarios', // Table column heading
+            'type' => 'wysiwyg',
+            'escaped' => false,
+            'limit'  => -1, // character limit; default is 50;
+            
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addField([
+            'name'      => 'user_id', // The db column name
+            'label'     => 'created_by', // Table column heading
+            'type' => 'hidden',
+            'value' => backpack_auth()->user()->id,
+            // 'wrapper'   => [
+            //     'class' => 'form-group col-md-4'
+            // ],
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

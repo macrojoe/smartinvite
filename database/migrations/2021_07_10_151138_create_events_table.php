@@ -17,8 +17,8 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('name');
             $table->datetime('date');
-            $table->text('text');
-            $table->string('image');
+            $table->text('comments')->nullable();
+            $table->string('image')->nullable();
 
             $table->bigInteger('event_status_id')->unsigned()->nullable();
             $table->foreign('event_status_id')->references('id')->on('event_status')->onDelete('cascade')->onUpdate('cascade');

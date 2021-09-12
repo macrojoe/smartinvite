@@ -16,14 +16,20 @@ class GuestStatusSeeder extends Seeder
     {
         //
         $status = new GuestStatus;
+        $status->id = 0;
         $status->name = 'Cancelado';
         $status->save();
 
+        $status->id = 0;
+        $status->save();
+
         $status = new GuestStatus;
+        $status->id = 1;
         $status->name = 'Confirmado';
         $status->save();
 
         $status = new GuestStatus;
+        $status->id = 2;
         $status->name = 'Pendiente';
         $status->save();
     }

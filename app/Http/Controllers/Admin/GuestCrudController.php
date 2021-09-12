@@ -29,6 +29,10 @@ class GuestCrudController extends CrudController
         CRUD::setModel(\App\Models\Guest::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest');
         CRUD::setEntityNameStrings('invitado', 'invitados');
+        CRUD::addButtonFromView('line', 'copyLink', 'guest.link', 'beginning');
+        $this->crud->disableResponsiveTable();
+        $this->crud->enableExportButtons();
+
     }
 
     /**
@@ -90,6 +94,15 @@ class GuestCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
+            'label'     => 'Menu', // Table column headin
+            'type'      => 'relationship',
+            'name'      => 'menu', // The db column name
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
             'label'     => 'Evento', // Table column headin
             'type'      => 'relationship',
             'name'      => 'event', // The db column name
@@ -107,7 +120,18 @@ class GuestCrudController extends CrudController
             // 'limit'  => 120, // character limit; default is 50;
         ]);
         
-        
+        CRUD::addColumn([
+            'name'      => 'message', // The db column name
+            'label'     => 'Mensaje para los novios', // Table column heading
+            'escaped' => false,
+            // 'limit'  => -1, // character limit; default is 50;
+            
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+
         CRUD::addColumn([
             'name'      => 'comments', // The db column name
             'label'     => 'Comentario', // Table column heading
@@ -119,6 +143,7 @@ class GuestCrudController extends CrudController
             // 'limit'  => 120, // character limit; default is 50;
         ]);
 
+        
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -234,6 +259,18 @@ class GuestCrudController extends CrudController
             ],
             'default' => '3'
          ]);
+
+        CRUD::addField([
+            'name'      => 'message', // The db column name
+            'label'     => 'Mensaje para los novios', // Table column heading
+            'type' => 'wysiwyg',
+            'escaped' => false,
+            'limit'  => -1, // character limit; default is 50;
+            
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
         
         CRUD::addField([
             'name'      => 'comments', // The db column name

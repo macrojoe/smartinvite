@@ -4,14 +4,10 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Cviebrock\EloquentSluggable\Sluggable;
 
-class Event extends Model
+class Menu extends Model
 {
     use CrudTrait;
-    use SoftDeletes;
-    use Sluggable;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,7 +15,7 @@ class Event extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'events';
+    protected $table = 'menus';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -32,49 +28,19 @@ class Event extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
-    }
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-    public function countGuest(){
-        return count($this->guests);
-    }
-
-    public function countConfirmedGuest(){
-        return count($this->guests->where('guest_status_id','2'));
-    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function status(){
-        return $this->belongsTo('App\Models\EventStatus','event_status_id');
-    }
 
-    public function guests(){
+    public function guest(){
         return $this->hasMany('App\Models\Guest');
     }
 
-    public function user(){
-        return $this->belongsTo('App\Models\User','user_id');
-    }
-    public function menu(){
-        return $this->belongsTo('App\Models\Menu');
+    public function event(){
+        return $this->belongsTo('App\Models\Event');
     }
     /*
     |--------------------------------------------------------------------------

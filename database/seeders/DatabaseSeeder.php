@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GuestStatusSeeder::class,
             EventStatusSeeder::class,
+            EventSeeder::class,
+            MenuSeeder::class,
+            GuestSeeder::class,
         ]);
     }
 }

@@ -16,10 +16,15 @@ class EventStatusSeeder extends Seeder
     {
         //
         $status = new EventStatus;
+        $status->id = 0;
         $status->name = 'Cancelado';
         $status->save();
 
+        $status->id = 0;
+        $status->save();
+
         $status = new EventStatus;
+        $status->id = 1;
         $status->name = 'Confirmado';
         $status->save();
     }

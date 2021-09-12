@@ -16,9 +16,11 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->nullable();
             $table->datetime('date');
             $table->text('comments')->nullable();
             $table->string('image')->nullable();
+            $table->string('url')->nullable();
 
             $table->bigInteger('event_status_id')->unsigned()->nullable();
             $table->foreign('event_status_id')->references('id')->on('event_status')->onDelete('cascade')->onUpdate('cascade');

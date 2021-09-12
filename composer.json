@@ -9,6 +9,8 @@
         "backpack/crud": "4.1.*",
         "backpack/generators": "^3.1",
         "backpack/permissionmanager": "^6.0",
+        "cviebrock/eloquent-sluggable": "^8.0",
+        "fico7489/laravel-revisionable-upgrade": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

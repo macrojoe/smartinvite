@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestingController;
+use App\Http\Controllers\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,9 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
+Route::get('/i/{event}/{guest}/{code}', [GuestController::class,'show']);
+
 Route::get('/storage', [TestingController::class, 'storageLink']);
 Route::get('/migrate', [TestingController::class, 'migrate']);
 Route::get('/optimize', [TestingController::class, 'optimize']);
+

@@ -29,6 +29,10 @@ class EventCrudController extends CrudController
         CRUD::setModel(\App\Models\Event::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/event');
         CRUD::setEntityNameStrings('evento', 'eventos');
+        $this->crud->disableResponsiveTable();
+        $this->crud->enableExportButtons();
+
+
     }
 
     /**
@@ -90,6 +94,23 @@ class EventCrudController extends CrudController
             'label'     => 'Imagen', // Table column headin
             'type'      => 'image',
             'name'      => 'image', // The db column name
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
+            'label'     => 'URL', // Table column headin
+            'name'      => 'url', // The db column name
+            'type'      => 'url',
+            'wrapper'   => [
+                // 'element' => 'a', // the element will default to "a" so you can skip it here
+                'href' => function ($crud, $column, $entry, $related_key) {
+                    return $entry->url;
+                },
+                'target' => '_blank',
+                // 'class' => 'some-class',
+            ],
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
@@ -161,6 +182,14 @@ class EventCrudController extends CrudController
             'model'     => "App\Models\EventStatus", // foreign key model
             'default' => request()->get("event_status_id",NULL)
          ]);
+
+        CRUD::addField([
+            'name'      => 'url', // The db column name
+            'label'     => 'URL', // Table column heading
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
 
         CRUD::addField([
             'label'     => 'Imagen', // Table column headin

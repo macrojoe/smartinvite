@@ -14,8 +14,13 @@ class CreateTablesTable extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string("name")->nullable();
+
+            $table->bigInteger('event_id')->unsigned()->nullable();
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade')->onUpdate('cascade');
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

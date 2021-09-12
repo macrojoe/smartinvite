@@ -26,6 +26,7 @@ class GuestSeeder extends Seeder
         $guest->confirmed_tickets = 2;
         $guest->confirmed_at = now();
         $guest->event_id = 1;
+        $guest->table_id = 2;
         $guest->guest_status_id = 1;
         $guest->save();
 
@@ -39,6 +40,7 @@ class GuestSeeder extends Seeder
         $guest->confirmed_tickets = 0;
         $guest->confirmed_at = now();
         $guest->event_id = 1;
+        $guest->table_id = 1;
         $guest->guest_status_id = 0;
         $guest->save();
 
@@ -51,6 +53,7 @@ class GuestSeeder extends Seeder
         $guest->tickets = 2;
         $guest->confirmed_tickets = 0;
         $guest->event_id = 1;
+        $guest->table_id = 1;
         $guest->guest_status_id = 2;
         $guest->save();
 

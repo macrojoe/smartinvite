@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             EventStatusSeeder::class,
             EventSeeder::class,
             MenuSeeder::class,
+            TableSeeder::class,
             GuestSeeder::class,
         ]);
     }

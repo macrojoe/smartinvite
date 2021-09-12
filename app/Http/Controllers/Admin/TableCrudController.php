@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\MenuRequest;
+use App\Http\Requests\TableRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class MenuCrudController
+ * Class TableCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class MenuCrudController extends CrudController
+class TableCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class MenuCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Menu::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/menu');
-        CRUD::setEntityNameStrings('menu', 'menus');
+        CRUD::setModel(\App\Models\Table::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/table');
+        CRUD::setEntityNameStrings('table', 'tables');
     }
 
     /**
@@ -39,8 +39,6 @@ class MenuCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        // CRUD::setFromDb(); // columns
-
         CRUD::addColumn([
             'name'      => 'name', // The db column name
             'label'     => 'Nombre', // Table column heading
@@ -73,7 +71,7 @@ class MenuCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(MenuRequest::class);
+        CRUD::setValidation(TableRequest::class);
 
         CRUD::addField([
             'name'      => 'name', // The db column name

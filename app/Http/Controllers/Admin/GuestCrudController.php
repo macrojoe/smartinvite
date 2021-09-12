@@ -86,6 +86,15 @@ class GuestCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
+            'label'     => 'Mesa', // Table column headin
+            'type'      => 'relationship',
+            'name'      => 'table', // The db column name
+            // 'prefix' => 'Name: ',
+            // 'suffix' => '(user)',
+            // 'limit'  => 120, // character limit; default is 50;
+        ]);
+
+        CRUD::addColumn([
             'name'      => 'confirmed_at', // The db column name
             'label'     => 'Fecha de Confirmación', // Table column heading
             // 'prefix' => 'Name: ',
@@ -119,6 +128,8 @@ class GuestCrudController extends CrudController
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
         ]);
+
+        
         
         CRUD::addColumn([
             'name'      => 'message', // The db column name
@@ -232,6 +243,19 @@ class GuestCrudController extends CrudController
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
         ]);
+
+        CRUD::addField([
+            // 1-n relationship
+            'label'     => 'Mesa', // Table column heading
+            'type'      => 'select',
+            'name'      => 'table_id', // the column that contains the ID of that connected entity;
+            'entity'    => 'table', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => "App\Models\Table", // foreign key model
+            'wrapper'   => [
+                'class' => 'form-group col-md-4'
+            ],
+         ]);
 
         CRUD::addField([
             // 1-n relationship

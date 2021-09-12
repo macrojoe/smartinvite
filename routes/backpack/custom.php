@@ -19,4 +19,5 @@ Route::group([
     Route::crud('guest-status', 'GuestStatusCrudController');
     Route::crud('event-status', 'EventStatusCrudController');
     Route::crud('menu', 'MenuCrudController');
+    Route::crud('table', 'TableCrudController');
 }); // this should be the absolute last line of this file

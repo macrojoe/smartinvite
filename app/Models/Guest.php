@@ -96,7 +96,11 @@ class Guest extends Model
     }
 
     public function urlButton(){
-        return '<a class="btn btn-xs btn-success" href="'.$this->url.'" data-toggle="tooltip" title=""><i class="las la-internet"></i> Ir a URL</a>';
+        return '<a class="btn btn-xs btn-success" href="'.$this->url.'" target="_blank" data-toggle="tooltip" title=""><i class="las la-external-link-square-alt"></i> Ir a URL</a>';
+    }
+
+    public function fullUrlButton(){
+        return '<a class="btn btn-xs btn-success" href="'.$this->event->url.'?iframe='.urlencode($this->url).'" target="_blank" data-toggle="tooltip" title=""><i class="las la-external-link-square-alt"></i> Ir a URL de Invitacion</a>';
     }
     
     /*

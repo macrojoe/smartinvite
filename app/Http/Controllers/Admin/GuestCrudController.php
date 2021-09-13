@@ -93,7 +93,8 @@ class GuestCrudController extends CrudController
         }
 
         CRUD::addButtonFromModelFunction('line', 'urlButton', 'urlButton', 'beginning');
-
+        CRUD::addButtonFromModelFunction('line', 'fullUrlButton', 'fullUrlButton', 'beginning');
+        
         CRUD::addFilter([
             'name'  => 'event_id',
             'type'  => 'select2',

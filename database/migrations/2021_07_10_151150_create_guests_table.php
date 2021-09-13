@@ -36,8 +36,8 @@ class CreateGuestsTable extends Migration
             $table->bigInteger('guest_status_id')->unsigned()->nullable();
             $table->foreign('guest_status_id')->references('id')->on('guest_status')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->bigInteger('menu_id')->unsigned()->nullable();
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade')->onUpdate('cascade');
+            // $table->bigInteger('menu_id')->unsigned()->nullable();
+            // $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade')->onUpdate('cascade');
 
             $table->bigInteger('table_id')->unsigned()->nullable();
             $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade')->onUpdate('cascade');

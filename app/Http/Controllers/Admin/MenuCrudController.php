@@ -67,15 +67,15 @@ class MenuCrudController extends CrudController
             // 'limit'  => 120, // character limit; default is 50;
         ]);
 
-        CRUD::addColumn([
-            'name'      => 'guest', // The db column name
-            'label'     => 'Invitados', // Table column heading
-            'type'      => 'model_function',
-            'function_name' => 'countGuest'
-            // 'prefix' => 'Name: ',
-            // 'suffix' => '(user)',
-            // 'limit'  => 120, // character limit; default is 50;
-        ]);
+        // CRUD::addColumn([
+        //     'name'      => 'guest', // The db column name
+        //     'label'     => 'Invitados', // Table column heading
+        //     'type'      => 'model_function',
+        //     'function_name' => 'countGuest'
+        //     // 'prefix' => 'Name: ',
+        //     // 'suffix' => '(user)',
+        //     // 'limit'  => 120, // character limit; default is 50;
+        // ]);
 
         CRUD::addColumn([
             'name'      => 'guestConfirmed', // The db column name

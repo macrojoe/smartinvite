@@ -21,7 +21,7 @@ class GuestSeeder extends Seeder
         $guest->email = "jose.marron@live.com";
         $guest->message = "Gracias por la invitación";
         $guest->comments = "Uso silla de ruedas";
-        $guest->menu_id = 2;
+        // $guest->menu_id = 2;
         $guest->tickets = 2;
         $guest->confirmed_tickets = 2;
         $guest->confirmed_at = now();
@@ -29,6 +29,10 @@ class GuestSeeder extends Seeder
         $guest->table_id = 2;
         $guest->guest_status_id = 1;
         $guest->save();
+
+        //Menu
+        $guest->menu()->attach([1 => ['guest_number' => '1']]);
+        $guest->menu()->attach([2 => ['guest_number' => '2']]);
 
         $guest = new Guest;
         $guest->name = "Adrian Quiroz";

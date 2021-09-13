@@ -69,8 +69,12 @@ class Guest extends Model
         return $this->belongsTo('App\Models\Event','event_id');
     }
 
+    // public function menu(){
+    //     return $this->belongsTo('App\Models\Menu');
+    // }
+
     public function menu(){
-        return $this->belongsTo('App\Models\Menu');
+        return $this->belongsToMany('App\Models\Menu')->withPivot('guest_number')->withTimestamps();
     }
 
     public function table(){

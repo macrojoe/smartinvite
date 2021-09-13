@@ -38,7 +38,7 @@ class GuestCrudController extends CrudController
         return $this->fetch([
             'model' => \App\Models\Table::class,
             'query' => function($model) {
-                $search = request()->input('form.8.value') ?? false;
+                $search = request()->input('form.9.value') ?? false;
                 if ($search) {
                     return $model->where('event_id', $search);
                 }else{
@@ -48,6 +48,23 @@ class GuestCrudController extends CrudController
             'searchable_attributes' => []
         ]);
         return $this->fetch(\App\Models\Table::class);
+    }
+
+    public function fetchMenu()
+    {
+        return $this->fetch([
+            'model' => \App\Models\Menu::class,
+            'query' => function($model) {
+                $search = request()->input('form.9.value') ?? false;
+                if ($search) {
+                    return $model->where('event_id', $search);
+                }else{
+                    return $model;
+                }
+            },
+            'searchable_attributes' => []
+        ]);
+        return $this->fetch(\App\Models\Menu::class);
     }
 
     /**
@@ -64,6 +81,16 @@ class GuestCrudController extends CrudController
             CRUD::addClause('where', 'event_id', '=', request()->get('event_id'));
             CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
         }
+        
+        CRUD::addFilter([
+            'name'  => 'event_id',
+            'type'  => 'select2',
+            'label' => 'Evento'
+        ], function () {
+            return \App\Models\Event::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'event_id', $value);
+        });
 
         CRUD::addColumn([
             'name'      => 'name', // The db column name
@@ -115,17 +142,17 @@ class GuestCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name'      => 'confirmed_at', // The db column name
-            'label'     => 'Fecha de Confirmación', // Table column heading
+            'label'     => 'Menu', // Table column headin
+            'type'      => 'relationship',
+            'name'      => 'menu', // The db column name
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
         ]);
 
         CRUD::addColumn([
-            'label'     => 'Menu', // Table column headin
-            'type'      => 'relationship',
-            'name'      => 'menu', // The db column name
+            'name'      => 'confirmed_at', // The db column name
+            'label'     => 'Fecha de Confirmación', // Table column heading
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
@@ -298,6 +325,33 @@ class GuestCrudController extends CrudController
             'entity'    => 'table', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model'     => "App\Models\Table", // foreign key model
+            // 'inline_create' => true,
+            'dependencies' => ['event_id'],
+            'wrapper'   => [
+                'class' => 'form-group col-md-4'
+            ],
+         ]);
+
+         CRUD::addField([
+            // 1-n relationship
+            'label'     => 'Menu', // Table column heading
+            'type'      => 'relationship',
+            'ajax'      => true,
+            'placeholder' => "Selecciona un evento",
+            'minimum_input_length' => 0,
+            'inline_create' => [ // specify the entity in singular
+                'entity' => 'menu', // the entity in singular
+                // OPTIONALS
+                'force_select' => true, // should the inline-created entry be immediately selected?
+                'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                'modal_route' => route('menu-inline-create'), // InlineCreate::getInlineCreateModal()
+                'create_route' =>  route('menu-inline-create-save'), // InlineCreate::storeInlineCreate()
+                'include_main_form_fields' => ['event_id'], // pass certain fields from the main form to the modal
+            ],
+            'name'      => 'menu_id', // the column that contains the ID of that connected entity;
+            'entity'    => 'menu', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => "App\Models\Menu", // foreign key model
             // 'inline_create' => true,
             'dependencies' => ['event_id'],
             'wrapper'   => [

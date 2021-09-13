@@ -44,6 +44,15 @@ class TableCrudController extends CrudController
             CRUD::addClause('where', 'event_id', '=', request()->get('event_id'));
             CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
         }
+        CRUD::addFilter([
+            'name'  => 'event_id',
+            'type'  => 'select2',
+            'label' => 'Evento'
+        ], function () {
+            return \App\Models\Event::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'event_id', $value);
+        });
 
         CRUD::addColumn([
             'name'      => 'name', // The db column name

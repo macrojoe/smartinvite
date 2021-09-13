@@ -62,11 +62,11 @@ class Event extends Model
         return 'slug';
     }
     public function countGuest(){
-        return count($this->guests);
+        return $this->guests->sum('tickets');
     }
 
     public function countConfirmedGuest(){
-        return count($this->guests->where('guest_status_id','2'));
+        return $this->guests->where('guest_status_id','1')->sum('confirmed_tickets');
     }
 
     /*

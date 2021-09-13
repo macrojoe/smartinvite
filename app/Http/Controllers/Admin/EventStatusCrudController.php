@@ -29,6 +29,8 @@ class EventStatusCrudController extends CrudController
         CRUD::setModel(\App\Models\EventStatus::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/event-status');
         CRUD::setEntityNameStrings('estatus de evento', 'estatus de eventos');
+        CRUD::enableExportButtons();
+
     }
 
     /**

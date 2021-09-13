@@ -33,6 +33,7 @@ class EventCrudController extends CrudController
         CRUD::addButtonFromModelFunction('line', 'guestButton', 'guestButton', 'beginning');
         CRUD::addButtonFromModelFunction('line', 'menuButton', 'menuButton', 'beginning');
         CRUD::addButtonFromModelFunction('line', 'tableButton', 'tableButton', 'beginning');
+        CRUD::enableExportButtons();
 
 
     }

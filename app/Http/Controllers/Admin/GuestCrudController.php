@@ -30,7 +30,7 @@ class GuestCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest');
         CRUD::setEntityNameStrings('invitado', 'invitados');
         CRUD::addButtonFromView('line', 'copyLink', 'guest.link', 'beginning');
-        $this->crud->enableExportButtons();
+        CRUD::enableExportButtons();
     }
 
     public function fetchTable()
@@ -81,7 +81,17 @@ class GuestCrudController extends CrudController
             CRUD::addClause('where', 'event_id', '=', request()->get('event_id'));
             CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
         }
-        
+
+        if(request()->get('menu_id')){
+            CRUD::addClause('where', 'menu_id', '=', request()->get('menu_id'));
+            CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
+        }
+
+        if(request()->get('table_id')){
+            CRUD::addClause('where', 'table_id', '=', request()->get('table_id'));
+            CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
+        }
+
         CRUD::addFilter([
             'name'  => 'event_id',
             'type'  => 'select2',
@@ -91,6 +101,21 @@ class GuestCrudController extends CrudController
         }, function ($value) { // if the filter is active
             $this->crud->addClause('where', 'event_id', $value);
         });
+
+        // CRUD::addFilter([
+        //     'name'  => 'menu_id',
+        //     'type'  => 'select2',
+        //     'label' => 'Menu',
+        // ], function () {
+        //     if(request()->get('event_id')){
+        //         return \App\Models\Menu::where('event_id',request()->get('event_id'))->get()->keyBy('id')->pluck('name', 'id')->toArray();
+        //     }
+        //     else{
+        //         return ['Selecciona un Evento'];
+        //     }
+        // }, function ($value) { // if the filter is active
+        //     $this->crud->addClause('where', 'menu_id', $value);
+        // });
 
         CRUD::addColumn([
             'name'      => 'name', // The db column name

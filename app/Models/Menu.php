@@ -28,7 +28,15 @@ class Menu extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
+    public function guestButton($crud = false){
+        return '<a class="btn btn-xs btn-success" href="'.backpack_url('guest').'?menu_id='.$this->id.'" data-toggle="tooltip" title=""><i class="las la-user-tie"></i> Invitados</a>';
+    }
+    public function countGuest(){
+        return $this->guest->sum('tickets');
+    }
+    public function countConfirmedGuest(){
+        return $this->guest->where('guest_status_id','1')->sum('confirmed_tickets');
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

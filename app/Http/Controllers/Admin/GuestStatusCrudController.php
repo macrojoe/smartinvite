@@ -29,6 +29,7 @@ class GuestStatusCrudController extends CrudController
         CRUD::setModel(\App\Models\GuestStatus::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest-status');
         CRUD::setEntityNameStrings('estatus de invitado', 'estatus de invitados');
+        CRUD::enableExportButtons();
     }
 
     /**

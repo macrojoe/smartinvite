@@ -86,7 +86,7 @@ class Event extends Model
         return $this->belongsTo('App\Models\User','user_id');
     }
     public function menu(){
-        return $this->belongsTo('App\Models\Menu');
+        return $this->hasMany('App\Models\Menu');
     }
     /*
     |--------------------------------------------------------------------------

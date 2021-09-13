@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/i/{event}/{guest}/{code}', [GuestController::class,'show']);
+Route::post('/i/{event}/{guest}/{code}', [GuestController::class,'store']);
 
 Route::get('/storage', [TestingController::class, 'storageLink']);
 Route::get('/migrate', [TestingController::class, 'migrate']);

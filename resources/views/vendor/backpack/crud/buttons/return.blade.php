@@ -1,0 +1,1 @@
+<a href="{{URL::previous()}}" class="btn btn-success ladda-button" data-style="zoom-in"><span class="ladda-label"><i class="la la-undo"></i> Regresar </span></a>

@@ -24,5 +24,10 @@ class TableSeeder extends Seeder
         $table->name = "Mesa 1";
         $table->event_id = 1;
         $table->save();
+
+        $table = new Table();
+        $table->name = "Mesa 1";
+        $table->event_id = 2;
+        $table->save();
     }
 }

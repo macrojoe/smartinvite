@@ -57,5 +57,18 @@ class GuestSeeder extends Seeder
         $guest->guest_status_id = 2;
         $guest->save();
 
+        $guest = new Guest;
+        $guest->name = "Guadalupe Martinez";
+        $guest->phone = "+523335550020";
+        $guest->email = "guadalupe@hotmail";
+        $guest->message = "";
+        $guest->comments = "";
+        $guest->tickets = 2;
+        $guest->confirmed_tickets = 0;
+        $guest->event_id = 2;
+        $guest->table_id = 3;
+        $guest->guest_status_id = 2;
+        $guest->save();
+
     }
 }

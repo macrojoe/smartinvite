@@ -29,8 +29,10 @@ class EventCrudController extends CrudController
         CRUD::setModel(\App\Models\Event::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/event');
         CRUD::setEntityNameStrings('evento', 'eventos');
-        $this->crud->disableResponsiveTable();
-        $this->crud->enableExportButtons();
+        CRUD::enableExportButtons();
+        CRUD::addButtonFromModelFunction('line', 'guestButton', 'guestButton', 'beginning');
+        CRUD::addButtonFromModelFunction('line', 'menuButton', 'menuButton', 'beginning');
+        CRUD::addButtonFromModelFunction('line', 'tableButton', 'tableButton', 'beginning');
 
 
     }
@@ -44,7 +46,7 @@ class EventCrudController extends CrudController
     protected function setupListOperation()
     {
         // CRUD::setFromDb(); // columns
-
+        // CRUD::disableResponsiveTable();
         CRUD::addColumn([
             'name'      => 'name', // The db column name
             'label'     => 'Nombre', // Table column heading

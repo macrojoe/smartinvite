@@ -21,5 +21,5 @@
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>Permisos</span></a></li>
     </ul>
 </li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('menu') }}'><i class='nav-icon la la-question'></i> Menus</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('table') }}'><i class='nav-icon la la-question'></i> Tables</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('menu') }}'><i class='nav-icon lab la-elementor'></i> Menus</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('table') }}'><i class='nav-icon las la-table'></i> Mesas</a></li>

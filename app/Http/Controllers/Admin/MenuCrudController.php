@@ -40,6 +40,10 @@ class MenuCrudController extends CrudController
     protected function setupListOperation()
     {
         // CRUD::setFromDb(); // columns
+        if(request()->get('event_id')){
+            CRUD::addClause('where', 'event_id', '=', request()->get('event_id'));
+            CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
+        }
 
         CRUD::addColumn([
             'name'      => 'name', // The db column name
@@ -78,6 +82,9 @@ class MenuCrudController extends CrudController
         CRUD::addField([
             'name'      => 'name', // The db column name
             'label'     => 'Nombre', // Table column heading
+            'wrapper'   => [
+                'class' => 'form-group col-md-6'
+            ],
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
@@ -92,8 +99,9 @@ class MenuCrudController extends CrudController
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model'     => "App\Models\Event", // foreign key model
             'wrapper'   => [
-                'class' => 'form-group col-md-4'
+                'class' => 'form-group col-md-6'
             ],
+            'default' => request()->get("event_id",NULL)
          ]);
 
         /**

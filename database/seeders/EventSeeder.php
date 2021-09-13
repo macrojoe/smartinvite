@@ -23,5 +23,14 @@ class EventSeeder extends Seeder
         $event->event_status_id = 1;
         $event->user_id = 1;
         $event->save();
+
+        $event = new Event;
+        $event->name = 'Evento 2';
+        $event->url = "https://undiaespecial.digital/luly-pablo/luly-pablo-opcion-dos/";
+        $event->date = "2021-10-21 11:00:00";
+        $event->comments = "Lorem ipsum";
+        $event->event_status_id = 1;
+        $event->user_id = 1;
+        $event->save();
     }
 }

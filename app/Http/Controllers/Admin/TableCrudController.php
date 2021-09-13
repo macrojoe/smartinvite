@@ -28,7 +28,7 @@ class TableCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Table::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/table');
-        CRUD::setEntityNameStrings('table', 'tables');
+        CRUD::setEntityNameStrings('mesa', 'mesas');
     }
 
     /**
@@ -39,6 +39,11 @@ class TableCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        if(request()->get('event_id')){
+            CRUD::addClause('where', 'event_id', '=', request()->get('event_id'));
+            CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
+        }
+
         CRUD::addColumn([
             'name'      => 'name', // The db column name
             'label'     => 'Nombre', // Table column heading
@@ -76,6 +81,9 @@ class TableCrudController extends CrudController
         CRUD::addField([
             'name'      => 'name', // The db column name
             'label'     => 'Nombre', // Table column heading
+            'wrapper'   => [
+                'class' => 'form-group col-md-6'
+            ],
             // 'prefix' => 'Name: ',
             // 'suffix' => '(user)',
             // 'limit'  => 120, // character limit; default is 50;
@@ -90,8 +98,9 @@ class TableCrudController extends CrudController
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model'     => "App\Models\Event", // foreign key model
             'wrapper'   => [
-                'class' => 'form-group col-md-4'
+                'class' => 'form-group col-md-6'
             ],
+            'default' => request()->get("event_id",NULL)
          ]);
 
         /**

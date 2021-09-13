@@ -32,6 +32,18 @@ class Event extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function guestButton($crud = false){
+        return '<a class="btn btn-xs btn-success" href="'.backpack_url('guest').'?event_id='.$this->id.'" data-toggle="tooltip" title=""><i class="las la-user-tie"></i> Invitados</a>';
+    }
+
+    public function menuButton($crud = false){
+        return '<a class="btn btn-xs btn-success" href="'.backpack_url('menu').'?event_id='.$this->id.'" data-toggle="tooltip" title=""><i class="lab la-elementor"></i> Menu</a>';
+    }
+
+    public function tableButton($crud = false){
+        return '<a class="btn btn-xs btn-success" href="'.backpack_url('table').'?event_id='.$this->id.'" data-toggle="tooltip" title=""><i class="las la-table"></i> Mesas</a>';
+    }
+
     public function sluggable(): array
     {
         return [

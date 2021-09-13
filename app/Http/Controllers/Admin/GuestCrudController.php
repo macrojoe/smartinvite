@@ -43,7 +43,12 @@ class GuestCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        // CRUD::setFromDb(); // columns
+        CRUD::disableResponsiveTable();
+
+        if(request()->get('event_id')){
+            CRUD::addClause('where', 'event_id', '=', request()->get('event_id'));
+            CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
+        }
 
         CRUD::addColumn([
             'name'      => 'name', // The db column name
@@ -246,25 +251,26 @@ class GuestCrudController extends CrudController
 
         CRUD::addField([
             // 1-n relationship
-            'label'     => 'Mesa', // Table column heading
-            'type'      => 'select',
-            'name'      => 'table_id', // the column that contains the ID of that connected entity;
-            'entity'    => 'table', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model'     => "App\Models\Table", // foreign key model
-            'wrapper'   => [
-                'class' => 'form-group col-md-4'
-            ],
-         ]);
-
-        CRUD::addField([
-            // 1-n relationship
             'label'     => 'Evento', // Table column heading
             'type'      => 'select',
             'name'      => 'event_id', // the column that contains the ID of that connected entity;
             'entity'    => 'event', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model'     => "App\Models\Event", // foreign key model
+            'wrapper'   => [
+                'class' => 'form-group col-md-4'
+            ],
+            'default' => request()->get("event_id",NULL)
+         ]);
+
+        CRUD::addField([
+            // 1-n relationship
+            'label'     => 'Mesa', // Table column heading
+            'type'      => 'select',
+            'name'      => 'table_id', // the column that contains the ID of that connected entity;
+            'entity'    => 'table', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => "App\Models\Table", // foreign key model
             'wrapper'   => [
                 'class' => 'form-group col-md-4'
             ],

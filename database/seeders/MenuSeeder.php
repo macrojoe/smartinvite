@@ -24,5 +24,15 @@ class MenuSeeder extends Seeder
         $menu->name = "Gourmet";
         $menu->event_id = 1;
         $menu->save();
+
+        $menu = new Menu();
+        $menu->name = "Vegano";
+        $menu->event_id = 2;
+        $menu->save();
+
+        $menu = new Menu();
+        $menu->name = "Gourmet";
+        $menu->event_id = 2;
+        $menu->save();
     }
 }

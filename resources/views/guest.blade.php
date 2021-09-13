@@ -48,16 +48,23 @@
                         <span class="text-gray-700">Número de asistentes confirmados</span>
                         <select name="guest[confirmed_tickets]" class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
                             @for($x = 0; $x < $guest->tickets; $x++ )
-                            <option>{{$x + 1}}</option>
+                            <option {{$guest->confirmed_tickets == $x + 1 ? 'selected' : ''}}>{{$x + 1}}</option>
                             @endfor
                         </select>
                     </label>
                     @for($x = 0; $x < $guest->tickets; $x++ )
                     <label class="block">
                         <span class="text-gray-700">Elección de menú - Invitado #{{$x + 1}} </span>
-                        <select name="menu[{{$x}}]" class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                        <select required name="menu[{{$x}}]" class="block w-full mt-1 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                            @if(!isset($guest->menu[$x]))
+                            <option disabled selected></option>
+                            @endif
                             @foreach($event->menu as $menu)
-                            <option value="{{$menu->id}}">{{$menu->name}}</option>
+                                @if(isset($guest->menu[$x]))
+                                    <option {{ $guest->menu[$x]->id == $menu->id ? 'selected' : ''}} value="{{$menu->id}}">{{$menu->name}}</option>
+                                @else
+                                    <option value="{{$menu->id}}">{{$menu->name}}</option>
+                                @endif
                             @endforeach
                         </select>
                     </label>

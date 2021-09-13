@@ -88,8 +88,13 @@ class Guest extends Model
     |--------------------------------------------------------------------------
     */
     public function getUrlAttribute(){
-        return env('APP_URL')."/i/".$this->event->slug.'/'.$this->slug.'/'.$this->code;
+        return  url("/i/".$this->event->slug.'/'.$this->slug.'/'.$this->code);
     }
+
+    public function urlButton(){
+        return '<a class="btn btn-xs btn-success" href="'.$this->url.'" data-toggle="tooltip" title=""><i class="las la-internet"></i> Ir a URL</a>';
+    }
+    
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

@@ -29,7 +29,7 @@ class GuestCrudController extends CrudController
         CRUD::setModel(\App\Models\Guest::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest');
         CRUD::setEntityNameStrings('invitado', 'invitados');
-        CRUD::addButtonFromView('line', 'copyLink', 'guest.link', 'beginning');
+        // CRUD::addButtonFromView('line', 'copyLink', 'guest.link', 'beginning');
         CRUD::enableExportButtons();
     }
 
@@ -91,6 +91,8 @@ class GuestCrudController extends CrudController
             CRUD::addClause('where', 'table_id', '=', request()->get('table_id'));
             CRUD::addButtonFromView('top', 'return', 'return', 'beginning');
         }
+
+        CRUD::addButtonFromModelFunction('line', 'urlButton', 'urlButton', 'beginning');
 
         CRUD::addFilter([
             'name'  => 'event_id',

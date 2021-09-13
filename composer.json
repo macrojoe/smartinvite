@@ -13,6 +13,7 @@
         "fico7489/laravel-revisionable-upgrade": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "glhd/aire": "^2.4",
         "guzzlehttp/guzzle": "^7.0.1",
         "laracasts/generators": "^2.0",
         "laravel/framework": "^8.40",

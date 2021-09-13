@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestingController;
-use App\Http\Controllers\GuestController;
+use App\Http\Controllers\Frontend\GuestController;
 
 /*
 |--------------------------------------------------------------------------

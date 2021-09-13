@@ -18,6 +18,7 @@ class TableCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -89,19 +90,37 @@ class TableCrudController extends CrudController
             // 'limit'  => 120, // character limit; default is 50;
         ]);
 
-        CRUD::addField([
-            // 1-n relationship
-            'label'     => 'Evento', // Table column heading
-            'type'      => 'select',
-            'name'      => 'event_id', // the column that contains the ID of that connected entity;
-            'entity'    => 'event', // the method that defines the relationship in your Model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'model'     => "App\Models\Event", // foreign key model
-            'wrapper'   => [
-                'class' => 'form-group col-md-6'
-            ],
-            'default' => request()->get("event_id",NULL)
-         ]);
+        if(request()->input("main_form_fields.0.value",NULL)){
+            CRUD::addField([
+                // 1-n relationship
+                'label'     => 'Evento', // Table column heading
+                'type'      => 'select',
+                'name'      => 'event_id', // the column that contains the ID of that connected entity;
+                'entity'    => 'event', // the method that defines the relationship in your Model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'model'     => "App\Models\Event", // foreign key model
+                'wrapper'   => [
+                    'class' => 'form-group col-md-6'
+                ],
+                'default' => request()->input("main_form_fields.0.value",NULL)
+             ]);
+        }
+        else{
+            CRUD::addField([
+                // 1-n relationship
+                'label'     => 'Evento', // Table column heading
+                'type'      => 'select',
+                'name'      => 'event_id', // the column that contains the ID of that connected entity;
+                'entity'    => 'event', // the method that defines the relationship in your Model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'model'     => "App\Models\Event", // foreign key model
+                'wrapper'   => [
+                    'class' => 'form-group col-md-6'
+                ],
+                'default' => request()->get("event_id",NULL)
+             ]);
+        }
+        
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\GuestRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-
 /**
  * Class GuestCrudController
  * @package App\Http\Controllers\Admin
@@ -18,6 +17,7 @@ class GuestCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -30,9 +30,24 @@ class GuestCrudController extends CrudController
         CRUD::setRoute(config('backpack.base.route_prefix') . '/guest');
         CRUD::setEntityNameStrings('invitado', 'invitados');
         CRUD::addButtonFromView('line', 'copyLink', 'guest.link', 'beginning');
-        $this->crud->disableResponsiveTable();
         $this->crud->enableExportButtons();
+    }
 
+    public function fetchTable()
+    {
+        return $this->fetch([
+            'model' => \App\Models\Table::class,
+            'query' => function($model) {
+                $search = request()->input('form.8.value') ?? false;
+                if ($search) {
+                    return $model->where('event_id', $search);
+                }else{
+                    return $model;
+                }
+            },
+            'searchable_attributes' => []
+        ]);
+        return $this->fetch(\App\Models\Table::class);
     }
 
     /**
@@ -266,11 +281,25 @@ class GuestCrudController extends CrudController
         CRUD::addField([
             // 1-n relationship
             'label'     => 'Mesa', // Table column heading
-            'type'      => 'select',
+            'type'      => 'relationship',
+            'ajax'      => true,
+            'placeholder' => "Selecciona un evento",
+            'minimum_input_length' => 0,
+            'inline_create' => [ // specify the entity in singular
+                'entity' => 'table', // the entity in singular
+                // OPTIONALS
+                'force_select' => true, // should the inline-created entry be immediately selected?
+                'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                'modal_route' => route('table-inline-create'), // InlineCreate::getInlineCreateModal()
+                'create_route' =>  route('table-inline-create-save'), // InlineCreate::storeInlineCreate()
+                'include_main_form_fields' => ['event_id'], // pass certain fields from the main form to the modal
+            ],
             'name'      => 'table_id', // the column that contains the ID of that connected entity;
             'entity'    => 'table', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model'     => "App\Models\Table", // foreign key model
+            // 'inline_create' => true,
+            'dependencies' => ['event_id'],
             'wrapper'   => [
                 'class' => 'form-group col-md-4'
             ],
